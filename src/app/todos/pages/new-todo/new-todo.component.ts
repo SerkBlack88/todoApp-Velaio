@@ -78,7 +78,7 @@ export class NewTodoComponent {
   }
 
   createPersonsInChargeFields(person?: any): FormGroup {
-    const abilitiesArray = this.fb.array([]);
+    const abilitiesArray = this.fb.array([], this.minLengthArray(1));
     if (person && person.abilities) {
       person.abilities.forEach((ability: string) => {
         abilitiesArray.push(this.fb.control(ability, Validators.required));
