@@ -1,0 +1,24 @@
+<mat-card color="primary" class="tarea" [ngClass]="{'completed': todo.isCompleted}">
+    <mat-card-content>
+        <span class="text-xl " [matBadge]="(index? index: 0) + 1"></span>
+        <div class="flex align-content-center mt-2 mb-1">
+            <mat-checkbox class="flex align-items-center" [checked]="todo.isCompleted" [disabled]="true"></mat-checkbox>
+            <span class="text-xl flex align-items-center font-medium"> {{ todo.taskName }} - {{ todo.limitDate | date: 'YYYY-MM-dd' }}</span>
+        </div>
+      <div class="ml-2">
+        <div class="mb-2">
+            <span class="text-lg ">Personas Asociadas:</span>
+        </div>
+        <div *ngFor="let person of todo.personsInCharge">
+          <p class="mb-0">- {{ person.personName }} ({{ person.age }})</p>
+          <p class="ml-2">Habilidades: {{ person.abilities.join(', ') }}</p>
+        </div>
+      </div>
+      <div>
+        <button mat-button mat-raised color="primary" [routerLink]="['/todos/edit', todo.id ]">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>

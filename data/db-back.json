@@ -1,0 +1,153 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "user": "John Doe",
+      "email": "john.due@gmail.com"
+    }
+  ],
+  "todos": [
+    {
+      "id": "tarea01",
+      "taskName": "Desarrollar una app",
+      "isCompleted": false,
+      "limitDate": "2024-09-26T05:00:00.000Z",
+      "personsInCharge": [
+        {
+          "personName": "Juan Perez",
+          "age": "30",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        },
+        {
+          "personName": "Peter Giroud",
+          "age": "28",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tarea02",
+      "taskName": "Crear Infraestructura",
+      "isCompleted": false,
+      "limitDate": "2024-09-18T05:00:00.000Z",
+      "personsInCharge": [
+        {
+          "personName": "Juan Perez",
+          "age": "30",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        },
+        {
+          "personName": "Peter Giroud",
+          "age": "28",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tarea03",
+      "taskName": "Habilitar AWS",
+      "isCompleted": false,
+      "limitDate": "2024-09-26T05:00:00.000Z",
+      "personsInCharge": [
+        {
+          "personName": "Juan Perez",
+          "age": "30",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        },
+        {
+          "personName": "Peter Giroud",
+          "age": "28",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tarea04",
+      "taskName": "Crear Frontend",
+      "isCompleted": true,
+      "limitDate": "2024-09-26T05:00:00.000Z",
+      "personsInCharge": [
+        {
+          "personName": "Juan Perez",
+          "age": "30",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        },
+        {
+          "personName": "Peter Giroud",
+          "age": "28",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tarea05",
+      "taskName": "Realizar maquetado",
+      "isCompleted": false,
+      "limitDate": "2024-09-26T05:00:00.000Z",
+      "personsInCharge": [
+        {
+          "personName": "Juan Perez",
+          "age": "30",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        },
+        {
+          "personName": "Peter Giroud",
+          "age": "28",
+          "abilities": [
+            "hello",
+            "world"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "98c8f4a2-f3ee-437f-9b90-071bd7ea2705",
+      "taskName": "Tarea 2",
+      "limitDate": "2024-09-27T05:00:00.000Z",
+      "isCompleted": true,
+      "personsInCharge": [
+        {
+          "personName": "Juan perez",
+          "age": 23,
+          "abilities": [
+            "asdf"
+          ]
+        },
+        {
+          "personName": "asdfa asdf",
+          "age": 123,
+          "abilities": [
+            "ggg"
+          ]
+        }
+      ]
+    }
+  ]
+}

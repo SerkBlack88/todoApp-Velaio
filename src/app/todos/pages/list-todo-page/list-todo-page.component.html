@@ -1,0 +1,18 @@
+<h1>Lista de Tareas</h1>
+<mat-divider></mat-divider>
+  
+<p>
+    Filtros: 
+    <mat-button-toggle-group class="filters" aria-label="Filtro de Tareas" [(ngModel)]="selectedFilter" (change)="filterTodos()">
+      <mat-button-toggle value="all">Todas</mat-button-toggle>
+      <mat-button-toggle value="completed">Completadas</mat-button-toggle>
+      <mat-button-toggle value="pending">Pendientes</mat-button-toggle>
+    </mat-button-toggle-group>
+</p>
+
+<div class="grid bm-8" >
+    <div *ngFor="let todo of filteredTodos; let i = index"
+        class="col-12 sm:col-6 md:col4 xl:col-4">
+        <todo-card [todo]="todo" [index]="i"></todo-card>
+    </div>
+</div>

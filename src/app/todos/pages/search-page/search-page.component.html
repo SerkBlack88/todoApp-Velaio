@@ -1,0 +1,39 @@
+<div class="flex flex-column">
+
+    <h3>Buscador</h3>
+
+    <mat-form-field>
+        <mat-label>Buscador de tareas</mat-label>
+        <input 
+            type="text" 
+            matInput 
+            placeholder="Buscar"
+            [formControl]="searchInput"
+            (input)="searchTodo()"
+            [matAutocomplete]="auto"
+        >
+    </mat-form-field>
+
+    <!-- {{ searchInput.value | json }} -->
+
+    <mat-autocomplete 
+        autoActiveFirstOption 
+        #auto="matAutocomplete"
+        (optionSelected)="onSelectedOption( $event )"
+    >
+        <mat-option *ngFor="let todo of todos" [value]="todo">
+            {{ todo.taskName }}
+        </mat-option>
+
+        <mat-option
+            *ngIf="todos.length === 0 && searchInput.value && searchInput.value.length > 0"
+            value="">
+
+            No hay resultados con el término {{ searchInput.value }}
+        </mat-option>
+    </mat-autocomplete>
+
+    <todo-card *ngIf="selectedTodo" [todo]="selectedTodo" ></todo-card>
+
+    <!-- {{ selectedTodo | json }} -->
+</div>

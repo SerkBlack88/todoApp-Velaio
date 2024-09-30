@@ -1,0 +1,126 @@
+<h1>
+    {{
+        (todoForm.value.id) ? 'Editar' : 'Crear Nueva '
+    }}
+    Tarea
+</h1>
+
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid">
+    <div class="col-12 sm:col-6 sm:col-offset-3 mt-4">
+        <mat-card>
+            <mat-card-content>
+                <div >
+                    <form [formGroup]="todoForm" (ngSubmit)="onSubmit()" autocomplete="off" class="grid">
+                        <mat-form-field class="col-12 sm:col-6">
+                            <mat-label>Nombre de la tarea</mat-label>
+                            <input formControlName="taskName" matInput type="text" placeholder="Nombre de la tarea" >
+                            <mat-error *ngIf="todoForm.get('taskName')?.hasError('required') && todoForm.get('taskName')?.touched">
+                                El campo es requerido
+                            </mat-error>
+                            <mat-error *ngIf="todoForm.get('taskName')?.hasError('minlength') && todoForm.get('taskName')?.touched">
+                                El nombre de la tarea debe tener al menos 3 caracteres
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="col-12 sm:col-6">
+                            <mat-label>Fecha límite</mat-label>
+                            <input formControlName="limitDate" matInput [matDatepicker]="picker" readonly>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="todoForm.get('limitDate')?.hasError('required') && todoForm.get('limitDate')?.touched">
+                                El campo es requerido
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-checkbox
+                            formControlName="isCompleted"
+                            class="col-12 sm:col-6"
+                            [labelPosition]="'after'"
+                        >
+                            Tarea Completada
+                        </mat-checkbox>
+                        <div class="col-12">
+                            <button type="button" (click)="addPerson()" class="col-8 col-offset-2" mat-flat-button color="accent">Añadir Persona</button>
+                        </div>
+                        <h2 *ngIf="personsInCharge.controls.length > 0" class="col-12 sm:col-12">Personas Asociadas:</h2>
+                        <div class="col-12 sm:col-12 grid" formArrayName="personsInCharge">
+                            <div class="col-12 sm:col-12 grid" *ngFor="let person of personsInCharge.controls; let i = index" [formGroupName]="i">
+                                <mat-form-field class="col-12 sm:col-6">
+                                    <mat-label>Nombre completo</mat-label>
+                                    <input formControlName="personName" matInput type="text" placeholder="Nombre de la tarea" >
+                                    <mat-error *ngIf="person.get('personName')?.hasError('required') && person.get('personName')?.touched">
+                                        El campo es requerido
+                                    </mat-error>
+                                    <mat-error class="text-center" *ngIf="person.get('personName')?.hasError('minlength') && person.get('personName')?.touched">
+                                        El nombre debe de ser mínimo de 5 caracteres
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-12 sm:col-6">
+                                    <mat-label>Edad</mat-label>
+                                    <input formControlName="age" matInput type="number" placeholder="Nombre de la tarea" min="0" >
+                                    <mat-error *ngIf="person.get('age')?.hasError('required') && person.get('age')?.touched">
+                                        El campo es requerido
+                                    </mat-error>
+                                    <mat-error *ngIf="person.get('age')?.hasError('min') && person.get('age')?.touched">
+                                        Debe de ser mayor a 18 años
+                                    </mat-error>
+                                    
+                                </mat-form-field>
+                                <mat-form-field class="col-12 sm:col-8">
+                                    <mat-label>Nombre de habilidad</mat-label>
+                                    <input matInput formControlName="newAbility" type="text"  name="newAbility" placeholder="Nombre de la tarea" >
+                                </mat-form-field>
+                                <button type="button" class="col-12 sm:col-4 sm:mt-3" mat-flat-button color="accent" (click)="addAbility(i)">Añadir Habilidad</button>
+                                <h2 *ngIf="getAbilitiesField(person).length > 0" class="col-12 sm:col-12">Habilidades:</h2>
+                                <div class="col-12 "  formArrayName="abilities" >
+                                    <div   *ngFor="let ability of getAbilitiesField(person); let j = index" [formGroupName]="j">
+                                        <mat-form-field class="col-12 sm:col-12 " >
+                                            <mat-label>Habilidad</mat-label>
+                                            <input matInput [formControl]="ability"/>
+                                            <button
+                                              mat-icon-button
+                                              matSuffix
+                                              (click)="removeAbility(i, j)"
+                                              [attr.aria-label]="'Hide password'"
+                                            >
+                                              <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <mat-error class="text-center col-6 col-offset-3" *ngIf="person.get('abilities')?.hasError('minLengthArray') && isSubmitted">
+                                        Cada persona debe tener al menos una habilidad.
+                                    </mat-error>
+                                    <button class="col-12 sm:col-6 sm:col-offset-6" mat-flat-button color="warn" (click)="removePerson(i)">Eliminar persona</button>
+                                </div>
+                                <mat-divider class="col-12"></mat-divider>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <mat-error class="text-center col-6 col-offset-3" *ngIf="todoForm.hasError('minLengthArray', 'personsInCharge') && isSubmitted">
+                                Debe agregar al menos una persona a la tarea.
+                            </mat-error>
+                            <mat-error class="text-center col-6 col-offset-3" *ngIf="todoForm.hasError('duplicateNames', 'personsInCharge') && isSubmitted">
+                                Los nombres de las personas no deben repetirse.
+                            </mat-error>
+                            <div class="flex justify-content-between">
+                                <button *ngIf="todoForm.get('id')?.value" type="button" mat-flat-button color="warn" (click)="onDeleteTask()" >Borrar Tarea</button>
+                                <button [ngClass]="{'col-6 col-offset-3': !todoForm.get('id')?.value}"  mat-flat-button color="primary">Guardar Tarea</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+
+<!-- <span>Valid</span>
+<pre>{{ todoForm.valid | json }}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{ todoForm.value | json }}</pre>
+<br> -->

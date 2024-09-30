@@ -1,0 +1,13 @@
+<ng-template #divLoading>
+    <mat-grid-list cols="1">
+        <mat-grid-tile>
+
+            <mat-spinner></mat-spinner>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</ng-template>
+
+<div *ngIf="todo; else divLoading" class="flex">
+    <todo-card [todo]="todo" ></todo-card>
+</div>
